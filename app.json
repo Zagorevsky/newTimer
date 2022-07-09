@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "newtimer",
+    "slug": "newtimer",
+    "version": "1.0.0",
+    "sdkVersion": "45.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "ios": {
+      "bundleIdentifier": "ru.n46.newTimer"
+    }
+  }
+}

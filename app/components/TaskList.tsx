@@ -1,13 +1,13 @@
 import { View, FlatList, StyleSheet } from 'react-native';
 import { Realm } from '@realm/react';
 
-import { Task } from '../models/Task';
+import { CardTime } from '../models/CardTime';
 import TaskItem from './TaskItem';
 
 interface TaskListProps {
-  tasks: Realm.Results<Task> | [];
-  onToggleTaskStatus: (task: Task) => void;
-  onDeleteTask: (task: Task) => void;
+  tasks: Realm.Results<CardTime> | [];
+  onToggleTaskStatus: (task: CardTime) => void;
+  onDeleteTask: (task: CardTime) => void;
 }
 
 function TaskList({tasks, onToggleTaskStatus, onDeleteTask}: TaskListProps) {

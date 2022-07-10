@@ -21,7 +21,7 @@ export default function RecordingTime(props) {
       />
       <Button
         onPress={() => {
-          props.addData(title);
+          props.addData(title, props.dataStart, props.dataFinish, props.timeRecording);
           props.setOnFormRecording(false)
         }}
         title="Save"

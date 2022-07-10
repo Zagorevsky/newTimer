@@ -28,13 +28,12 @@ function MainScreen() {
   const cardsTime = useMemo(() => result.sorted("dataStart"), [result]);
 
   const handleAddCardTime = useCallback(
-    (title) => {
+    (title, dataStart, dataFinish, timeRecording) => {
       if (!title) {
         return;
       }
       realm.write(() => {
-
-        realm.create("CardTime", CardTime.generate(title, dataStart, dataFinish, time));
+        realm.create("CardTime", CardTime.generate(title, dataStart, dataFinish, timeRecording));
       });
     },
     [realm]
@@ -96,6 +95,7 @@ function MainScreen() {
         setModalVisible={setModalVisible}
         timeRecording={timeRecording}
         dataStart={dataStart}
+        dataFinish={dataFinish}
         addData={handleAddCardTime}
         cardTime={cardsTime}
         setOnFormRecording={setOnFormRecording}

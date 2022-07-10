@@ -30,6 +30,7 @@ const ModalScreen = (props) => {
                 timeRecording={props.timeRecording}
                 setModalVisible={props.setModalVisible}
                 dataStart={props.dataStart}
+                dataFinish={props.dataFinish}
                 addData={props.addData}
                 setOnFormRecording={props.setOnFormRecording}
               />

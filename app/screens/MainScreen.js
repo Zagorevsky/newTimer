@@ -32,7 +32,9 @@ function MainScreen() {
       if (!title) {
         return;
       }
+      console.log(1)
       realm.write(() => {
+
         realm.create("CardTime", CardTime.generate(title, dataStart, dataFinish, timeRecording));
       });
     },

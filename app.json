@@ -10,6 +10,9 @@
     ],
     "ios": {
       "bundleIdentifier": "ru.n46.newTimer"
+    },
+    "android": {
+      "package": "ru.n46.newTimer"
     }
   }
 }

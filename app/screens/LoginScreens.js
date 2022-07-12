@@ -1,17 +1,22 @@
 import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
+import colors from "../styles/colors";
+
 import {
-  KeyboardAvoidingView,
+  View,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut
 } from "firebase/auth";
+
 import { auth } from "../../firebase";
 
 const LoginScreen = () => {
@@ -23,7 +28,7 @@ const LoginScreen = () => {
   useEffect(() => {
     const handleAuthCheck = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigation.replace("Home");
+        navigation.replace("Main");
       }
     });
 
@@ -43,14 +48,21 @@ const LoginScreen = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        console.log("Logged in with:", user.email);
+      })
+      .catch((error) => console.log(error.message));
+  };
+
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        navigation.replace("Login");
       })
       .catch((error) => console.log(error.message));
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <ScrollView style={styles.scrollView}>
+    <View style={styles.container} behavior="padding">
+      <View style={styles.scrollView}>
         <TextInput
           placeholder="Email"
           value={email}
@@ -65,7 +77,7 @@ const LoginScreen = () => {
           secureTextEntry
         />
         <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Log-in</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={handleSignUp}
@@ -73,8 +85,11 @@ const LoginScreen = () => {
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        <TouchableOpacity onPress={logout}>
+          <Text style={styles.buttonOutlineText}>Log-out</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
@@ -82,12 +97,16 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    flex: 1,
     alignItems: "center",
-    height: 400,
+    justifyContent: 'center',
+    backgroundColor: colors.darkBlue,
+    height: '100%',
   },
   scrollView: {
     flex: 1,
+    alignItems: "center",
+    justifyContent: 'center',
   },
   inputContainer: {
     width: "80%",
@@ -106,6 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginTop: 40,
+    width: 250,
   },
   button: {
     backgroundColor: "#0782F9",
@@ -113,11 +133,12 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 10,
     alignItems: "center",
+    width: 200,
+
   },
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "#0782F9",
     borderWidth: 2,
   },
   buttonText: {

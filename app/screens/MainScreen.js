@@ -1,13 +1,20 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useNavigation } from "@react-navigation/core";
 import {
   StyleSheet,
   View,
-  Alert,
+  AlertAlert,
+  TouchableOpacity,
+  Text,
 } from "react-native";
 import Timer from "../components/Timer";
 import ControlButtons from "../components/ControlButtons";
 import ModalScreen from "./ModalScreen";
 import CardTimeContext, { CardTime } from "../models/CardTime";
+
+import { signOut } from "firebase/auth";
+
+import { auth } from "../../firebase";
 
 const { useRealm, useQuery, RealmProvider } = CardTimeContext;
 
@@ -24,6 +31,7 @@ function MainScreen() {
 
   const realm = useRealm();
   const result = useQuery(CardTime);
+  const navigation = useNavigation();
 
   const cardsTime = useMemo(() => result.sorted("dataStart"), [result]);
 
@@ -32,10 +40,12 @@ function MainScreen() {
       if (!title) {
         return;
       }
-      console.log(1)
+      console.log(1);
       realm.write(() => {
-
-        realm.create("CardTime", CardTime.generate(title, dataStart, dataFinish, timeRecording));
+        realm.create(
+          "CardTime",
+          CardTime.generate(title, dataStart, dataFinish, timeRecording)
+        );
       });
     },
     [realm]
@@ -50,6 +60,13 @@ function MainScreen() {
     [realm]
   );
 
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {
+        navigation.replace("Login");
+      })
+      .catch((error) => console.log(error.message));
+  };
 
   useEffect(() => {
     let interval = null;
@@ -92,6 +109,9 @@ function MainScreen() {
 
   return (
     <View style={styles.centeredView}>
+      <TouchableOpacity onPress={logOut}>
+        <Text style={styles.text}>Log-out</Text>
+      </TouchableOpacity>
       <ModalScreen
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
@@ -131,6 +151,11 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
     bottom: 0,
     right: 0,
+  },
+  text: {
+    color: "#f5f5f5",
+    fontSize: 40,
+    textAlign: "center",
   },
 });
 

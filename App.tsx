@@ -7,6 +7,7 @@ import LoginScreen from './app/screens/LoginScreens';
 import colors from "./app/styles/colors";
 import Main from "./app/screens/MainScreen";
 
+
 const { useRealm, useQuery, RealmProvider } = CardTimeContext;
 const Stack = createNativeStackNavigator();
 
@@ -15,8 +16,8 @@ function App() {
   return (
     <NavigationContainer>
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-      <Stack.Screen name="Main" component={Main} />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Main"  component={Main} />
     </Stack.Navigator>
   </NavigationContainer>
   );

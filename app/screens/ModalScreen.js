@@ -23,7 +23,6 @@ const ModalScreen = (props) => {
               }}
             >
               <Icon name="caret-down" type="fontisto" color="#3b3b3b" />
-
             </Pressable>
             {props.onFormRecording ? (
               <FormRecordingTime

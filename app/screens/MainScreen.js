@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
+import { Icon } from "react-native-elements";
 import Timer from "../components/Timer";
 import ControlButtons from "../components/ControlButtons";
 import ModalScreen from "./ModalScreen";
@@ -40,7 +41,6 @@ function MainScreen() {
       if (!title) {
         return;
       }
-      console.log(1);
       realm.write(() => {
         realm.create(
           "CardTime",
@@ -109,8 +109,8 @@ function MainScreen() {
 
   return (
     <View style={styles.centeredView}>
-      <TouchableOpacity onPress={logOut}>
-        <Text style={styles.text}>Log-out</Text>
+      <TouchableOpacity onPress={logOut} style={{marginTop:40}} >
+        <Icon name="logout" type="flaticon" color="#3b3b3b" />
       </TouchableOpacity>
       <ModalScreen
         modalVisible={modalVisible}

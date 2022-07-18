@@ -85,9 +85,6 @@ const LoginScreen = () => {
         >
           <Text style={styles.buttonOutlineText}>Register</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={logout}>
-          <Text style={styles.buttonOutlineText}>Log-out</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
